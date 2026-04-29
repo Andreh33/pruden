@@ -17,7 +17,7 @@ export function Header() {
   const scrolled = useScrolled(8);
 
   return (
-    <header className="sticky top-0 z-40 w-full">
+    <header className="fixed inset-x-0 top-0 z-40 w-full">
       <TopUtilityBar />
       <div
         className={cn(

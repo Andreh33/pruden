@@ -104,7 +104,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Saltar al contenido
         </a>
         <Header />
-        <main id="main" className="flex min-h-[60vh] flex-col">
+        {/* Compensación del header fijo: 24 (96 px) móvil; 148 px en lg+ por
+            la barra de utility (36 px) + header principal (112 px). */}
+        <main id="main" className="flex min-h-[60vh] flex-col pt-24 lg:pt-[148px]">
           {children}
         </main>
         <Footer />
