@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Brand — primarios */
+  --color-brand-blue-900: #0b1f3a;
+  --color-brand-blue-700: #123a6b;
+  --color-brand-blue-500: #1e5aa8;
+  --color-brand-blue-200: #b6cfeb;
+  --color-brand-blue-50: #eaf2fb;
+
+  /* Brand — acento */
+  --color-brand-red-600: #c8102e;
+  --color-brand-red-700: #a50d26;
+
+  /* Neutros */
+  --color-neutral-950: #0a0a0a;
+  --color-neutral-900: #111827;
+  --color-neutral-800: #1f2937;
+  --color-neutral-700: #374151;
+  --color-neutral-600: #4b5563;
+  --color-neutral-500: #6b7280;
+  --color-neutral-400: #9ca3af;
+  --color-neutral-300: #d1d5db;
+  --color-neutral-200: #e5e7eb;
+  --color-neutral-100: #f3f4f6;
+  --color-neutral-50: #f9fafb;
+
+  /* Tokens semánticos */
+  --color-background: #ffffff;
+  --color-foreground: var(--color-neutral-900);
+  --color-muted: var(--color-neutral-50);
+  --color-muted-foreground: var(--color-neutral-600);
+  --color-border: var(--color-neutral-200);
+  --color-ring: var(--color-brand-blue-500);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+:root {
+  /* Tipografía fluida */
+  --font-size-hero: clamp(2.25rem, 5vw + 1rem, 4.5rem);
+  --font-size-h1: clamp(1.875rem, 3vw + 1rem, 3rem);
+  --font-size-h2: clamp(1.5rem, 2vw + 0.75rem, 2.25rem);
+  --font-size-h3: clamp(1.25rem, 1.5vw + 0.5rem, 1.5rem);
+  --font-size-stat: clamp(2.5rem, 6vw + 1rem, 5rem);
+  --font-size-lead: clamp(1.125rem, 0.5vw + 1rem, 1.25rem);
+
+  --tracking-tight: -0.02em;
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-relaxed: 1.65;
+
+  --ease-out-cubic: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-quint: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: light;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    line-height: var(--leading-relaxed);
+    font-feature-settings:
+      "ss01",
+      "cv11";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-sans);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-tight);
+    color: var(--color-neutral-900);
+  }
+
+  .num,
+  [data-num] {
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-brand-blue-500);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-brand-blue-700);
+    color: #fff;
+  }
+}
+
+/* Wrapper container estándar */
+.container-prose {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  max-width: 80rem;
+}
+@media (min-width: 768px) {
+  .container-prose {
+    padding-inline: 2rem;
+  }
+}
+
+/* Subrayado decorativo bajo H2 */
+.h2-rule::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--color-brand-red-600);
+  margin-top: 16px;
+}
+
+/* Reduced motion: anula animaciones decorativas */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
