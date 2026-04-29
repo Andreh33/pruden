@@ -1,6 +1,8 @@
 import type { LucideIcon } from "lucide-react";
 import { Building2, Layers, Mountain, Route, Truck } from "lucide-react";
 
+import { IMAGES } from "@/lib/images";
+
 export type ServiceSlug =
   | "movimientos-de-tierra"
   | "transportes"
@@ -26,7 +28,7 @@ export const services: Service[] = [
     intro:
       "En lo que a movimiento de tierras y excavaciones se refiere, ofrecemos una amplia gama de servicios especializados en la preparación y acondicionamiento del terreno para proyectos de construcción.",
     icon: Mountain,
-    image: "/images/placeholder.svg",
+    image: IMAGES.serviceMovimientos,
   },
   {
     slug: "transportes",
@@ -36,7 +38,7 @@ export const services: Service[] = [
     intro:
       "Prestamos servicios especializados de transporte y alquiler de góndolas para cubrir las necesidades logísticas de cada proyecto.",
     icon: Truck,
-    image: "/images/placeholder.svg",
+    image: IMAGES.serviceTransportes,
   },
   {
     slug: "obras-publicas",
@@ -46,7 +48,7 @@ export const services: Service[] = [
     intro:
       "Llevamos a cabo la ejecución de obras públicas, ofreciendo soluciones integrales para proyectos de infraestructura y desarrollo urbano.",
     icon: Building2,
-    image: "/images/placeholder.svg",
+    image: IMAGES.serviceObras,
   },
   {
     slug: "suministro-de-aridos",
@@ -56,7 +58,7 @@ export const services: Service[] = [
     intro:
       "Nos dedicamos a la extracción, producción y comercialización de áridos, ofreciendo una amplia gama de productos para cubrir las necesidades de la industria de construcción y obra civil.",
     icon: Layers,
-    image: "/images/placeholder.svg",
+    image: IMAGES.serviceAridos,
   },
   {
     slug: "tratamientos-bituminosos",
@@ -66,7 +68,7 @@ export const services: Service[] = [
     intro:
       "Estamos especializados en la aplicación de tratamientos bituminosos, ofreciendo soluciones eficientes y duraderas para el mantenimiento y mejora de superficies de pavimento.",
     icon: Route,
-    image: "/images/placeholder.svg",
+    image: IMAGES.serviceBituminosos,
   },
 ];
 

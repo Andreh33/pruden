@@ -11,6 +11,7 @@ import { ReasonsGrid } from "@/components/sections/reasons-grid";
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/config";
+import { galleryByService } from "@/lib/images";
 import { serviceDetails } from "@/lib/service-detail";
 import { getService, services, type ServiceSlug } from "@/lib/services";
 
@@ -46,6 +47,7 @@ export default async function ServicioDetallePage({
 
   const detail = serviceDetails[slug];
   const otros = services.filter((o) => o.slug !== slug).slice(0, 3);
+  const gallery = galleryByService[slug] ?? [];
 
   return (
     <>
@@ -212,7 +214,7 @@ export default async function ServicioDetallePage({
               <Reveal key={alt} delay={i * 0.06}>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-md border border-neutral-200 bg-neutral-100">
                   <Image
-                    src="/images/placeholder.svg"
+                    src={gallery[i] ?? s.image}
                     alt={alt}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"

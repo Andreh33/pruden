@@ -8,6 +8,7 @@ import { ScrollProgress } from "@/components/scroll-progress";
 import { ReasonsGrid } from "@/components/sections/reasons-grid";
 import { Reveal } from "@/components/reveal";
 import { Button } from "@/components/ui/button";
+import { IMAGES } from "@/lib/images";
 
 export const metadata: Metadata = {
   title: "Empresa — Quiénes somos",
@@ -63,13 +64,14 @@ export default function EmpresaPage() {
       <section className="relative isolate overflow-hidden bg-brand-blue-900 text-white">
         <div className="absolute inset-0 -z-10">
           <Image
-            src="/images/placeholder.svg"
+            src={IMAGES.empresaHero}
             alt=""
             fill
             sizes="100vw"
-            className="object-cover opacity-35"
+            className="object-cover opacity-50"
+            priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-blue-900/85 via-brand-blue-900/70 to-brand-blue-900/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-blue-900/85 via-brand-blue-900/65 to-brand-blue-900/40" />
         </div>
         <div className="container-prose py-24 md:py-32">
           <Reveal>
@@ -166,7 +168,7 @@ export default function EmpresaPage() {
             </h2>
             <div className="relative mt-8 aspect-[4/5] overflow-hidden rounded-md border border-neutral-200 bg-neutral-100">
               <Image
-                src="/images/placeholder.svg"
+                src={IMAGES.empresaTeam}
                 alt="Equipo de Pruden e Hijos en obra"
                 fill
                 sizes="(max-width: 1024px) 100vw, 33vw"

@@ -9,6 +9,7 @@ import { ProcessTimeline } from "@/components/sections/process-timeline";
 import { ReasonsGrid } from "@/components/sections/reasons-grid";
 import { StatsBand } from "@/components/sections/stats-band";
 import { Button } from "@/components/ui/button";
+import { IMAGES } from "@/lib/images";
 import { services } from "@/lib/services";
 
 export default function HomePage() {
@@ -18,14 +19,14 @@ export default function HomePage() {
       <section className="relative isolate overflow-hidden bg-brand-blue-900 text-white">
         <div className="absolute inset-0 -z-10">
           <Image
-            src="/images/placeholder.svg"
+            src={IMAGES.heroHome}
             alt=""
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-40"
+            className="object-cover opacity-55"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-blue-900/85 via-brand-blue-900/70 to-brand-blue-900/45" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-blue-900/85 via-brand-blue-900/65 to-brand-blue-900/40" />
         </div>
 
         <div className="container-prose flex min-h-[78vh] flex-col justify-center py-24 lg:py-36">
@@ -143,7 +144,7 @@ export default function HomePage() {
           <Reveal className="lg:col-span-5" direction="left">
             <div className="relative aspect-[4/5] overflow-hidden rounded-md border border-neutral-200 bg-neutral-100">
               <Image
-                src="/images/placeholder.svg"
+                src={IMAGES.empresaPreview}
                 alt="Equipo de Pruden e Hijos en obra"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"

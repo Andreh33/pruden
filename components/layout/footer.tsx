@@ -2,6 +2,7 @@ import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { ContactMarquee } from "@/components/sections/contact-marquee";
 import { Button } from "@/components/ui/button";
 import { SITE, telHref } from "@/lib/config";
 import { services } from "@/lib/services";
@@ -12,8 +13,11 @@ export function Footer() {
 
   return (
     <footer className="mt-20">
+      {/* Marquesina roja con CTA + ciudad */}
+      <ContactMarquee />
+
       {/* Banda CTA pre-footer */}
-      <section className="bg-brand-red-600 py-14">
+      <section className="bg-brand-blue-900 py-14">
         <div className="container-prose flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
@@ -23,7 +27,7 @@ export function Footer() {
               Cuéntanos qué necesitas. Te respondemos en menos de 24 horas laborables.
             </p>
           </div>
-          <Button asChild variant="outlineLight" size="lg" className="bg-white !text-brand-red-700 hover:bg-transparent hover:!text-white">
+          <Button asChild size="lg">
             <Link href="/contacto">
               Solicitar presupuesto
               <ArrowRight className="size-4" strokeWidth={2} />
