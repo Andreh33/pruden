@@ -35,7 +35,7 @@ function StatItem({ stat }: { stat: (typeof stats)[number] }) {
         <Icon className="size-5" strokeWidth={1.75} />
       </span>
       <div
-        className="num stat-number-shift mt-4 font-bold tracking-tight"
+        className="num stat-number mt-4 font-bold tracking-tight"
         style={{ fontSize: "var(--font-size-stat)", lineHeight: 1 }}
       >
         {stat.prefix ?? ""}
