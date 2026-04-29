@@ -58,40 +58,46 @@ export function CoverageArea() {
 }
 
 /**
- * Mapa estilizado de la Península Ibérica con las 8 provincias de cobertura
- * habitual marcadas y la sede de Chillón destacada con un pin rojo pulsante.
+ * Mapa de la Península Ibérica + Baleares con las 8 provincias de cobertura
+ * marcadas y la sede de Chillón destacada con un pin rojo pulsante.
  *
- * Coordenadas en viewBox 800×500. Outline trazado a mano para mantener un
- * archivo ligero y reconocible (Spain + Portugal como masa única, Baleares
- * como islas separadas). Las posiciones de las provincias siguen su
- * disposición real respecto a la península.
+ * Coordenadas proyectadas a viewBox 800×500 a partir de longitud/latitud
+ * reales (proyección equirectangular sencilla):
+ *   x = 20 + (lon + 9.27) × 60.4
+ *   y = 20 + (43.8 − lat) × 59.0
+ *
+ * El outline se ha trazado con ~30 puntos cartográficos clave (Cabos de
+ * Finisterre, Estaca de Bares, Peñas, Higuer, Cap de Creus, Nao, Gata,
+ * Tarifa, etc.) para que la silueta sea inmediatamente reconocible.
  */
 const HIGHLIGHT_PROVINCES = [
-  { name: "Madrid", cx: 460, cy: 200 },
-  { name: "Toledo", cx: 415, cy: 245 },
-  { name: "Cuenca", cx: 510, cy: 230 },
-  { name: "Albacete", cx: 555, cy: 295 },
-  { name: "Ciudad Real", cx: 425, cy: 305, sede: true },
-  { name: "Badajoz", cx: 290, cy: 305 },
-  { name: "Córdoba", cx: 380, cy: 365 },
-  { name: "Jaén", cx: 460, cy: 365 },
+  { name: "Madrid", cx: 356, cy: 219 },
+  { name: "Toledo", cx: 337, cy: 252 },
+  { name: "Cuenca", cx: 451, cy: 240 },
+  { name: "Albacete", cx: 467, cy: 304 },
+  { name: "Ciudad Real", cx: 343, cy: 304 },
+  { name: "Badajoz", cx: 159, cy: 310 },
+  { name: "Córdoba", cx: 291, cy: 369 },
+  { name: "Jaén", cx: 351, cy: 375 },
 ] as const;
+
+const CHILLON = { cx: 286, cy: 314 };
 
 function CoverageMap() {
   return (
-    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-md border border-neutral-200 bg-gradient-to-br from-brand-blue-50 via-white to-neutral-50 p-4">
+    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-md border border-neutral-200 bg-gradient-to-br from-brand-blue-50 via-white to-neutral-50 p-3">
       <svg
         viewBox="0 0 800 500"
         preserveAspectRatio="xMidYMid meet"
         xmlns="http://www.w3.org/2000/svg"
         role="img"
-        aria-label="Mapa de cobertura: Península Ibérica con sede en Chillón (Ciudad Real) y las provincias donde operamos habitualmente"
+        aria-label="Mapa de cobertura: España con sede en Chillón (Ciudad Real)"
         className="block h-full w-full"
       >
         <defs>
-          <pattern id="cov-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <pattern id="cov-grid" width="48" height="48" patternUnits="userSpaceOnUse">
             <path
-              d="M 40 0 L 0 0 0 40"
+              d="M 48 0 L 0 0 0 48"
               fill="none"
               stroke="#cbd5e1"
               strokeWidth="0.5"
@@ -99,161 +105,210 @@ function CoverageMap() {
             />
           </pattern>
           <radialGradient id="cov-pin-pulse" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#c8102e" stopOpacity="0.4" />
+            <stop offset="0%" stopColor="#c8102e" stopOpacity="0.45" />
             <stop offset="100%" stopColor="#c8102e" stopOpacity="0" />
           </radialGradient>
         </defs>
 
         <rect width="800" height="500" fill="url(#cov-grid)" />
 
-        {/* Iberian peninsula outline */}
+        {/* Península Ibérica — España + Portugal como masa única */}
         <path
           d="
-            M 95 130
-            L 150 105
-            L 245 92
-            L 360 88
-            L 460 90
-            L 545 100
-            L 615 118
-            L 670 138
-            L 715 165
-            L 730 195
-            L 720 230
-            L 695 270
-            L 668 305
-            L 640 345
-            L 612 385
-            L 568 415
-            L 510 440
-            L 440 455
-            L 372 460
-            L 310 450
-            L 268 432
-            L 240 412
-            L 232 380
-            L 232 330
-            L 235 270
-            L 240 220
-            L 240 180
-            L 220 152
-            L 180 138
-            L 130 130
+            M 72 46
+            Q 90 30 115 21
+            Q 230 22 403 52
+            L 472 44
+            Q 488 50 500 67
+            Q 580 72 641 85
+            Q 720 95 780 107
+            Q 750 145 711 162
+            L 655 178
+            L 619 202
+            L 582 245
+            L 557 276
+            Q 590 295 593 319
+            L 551 342
+            L 538 384
+            Q 510 410 446 438
+            L 431 431
+            Q 380 442 313 438
+            L 287 456
+            L 241 480
+            Q 215 470 200 449
+            Q 175 425 160 405
+            L 113 389
+            Q 130 320 137 254
+            Q 110 195 64 130
+            L 53 112
+            Q 35 95 20 74
+            Q 22 62 24 58
             Z
           "
-          fill="#e5e7eb"
-          stroke="#94a3b8"
+          fill="#e2e8f0"
+          stroke="#64748b"
           strokeWidth="1.5"
           strokeLinejoin="round"
         />
 
-        {/* Portuguese border (línea fina, no recortada visualmente) */}
+        {/* Frontera con Portugal (línea discontinua, dentro de la silueta) */}
         <path
-          d="M 232 270 Q 218 320 240 405"
+          d="M 113 389 Q 130 320 137 254 Q 110 195 64 130"
           fill="none"
-          stroke="#9ca3af"
-          strokeWidth="1.2"
+          stroke="#94a3b8"
+          strokeWidth="1.3"
           strokeDasharray="4 4"
-          opacity="0.7"
+          opacity="0.85"
         />
+
+        {/* Etiqueta "PORTUGAL" tenue */}
+        <text
+          x="68"
+          y="290"
+          fontSize="11"
+          fontFamily="ui-sans-serif, system-ui, Inter, sans-serif"
+          fontWeight="600"
+          fill="#94a3b8"
+          letterSpacing="2"
+        >
+          PORTUGAL
+        </text>
 
         {/* Baleares */}
-        <g fill="#e5e7eb" stroke="#94a3b8" strokeWidth="1.2">
-          <ellipse cx="725" cy="320" rx="22" ry="11" />
-          <ellipse cx="765" cy="305" rx="9" ry="5" />
-          <circle cx="690" cy="335" r="6" />
+        <g fill="#e2e8f0" stroke="#64748b" strokeWidth="1.2" strokeLinejoin="round">
+          {/* Mallorca */}
+          <ellipse cx="725" cy="285" rx="22" ry="13" />
+          {/* Menorca */}
+          <ellipse cx="765" cy="265" rx="11" ry="5" />
+          {/* Ibiza */}
+          <ellipse cx="685" cy="305" rx="10" ry="6" />
+          {/* Formentera */}
+          <circle cx="690" cy="318" r="3" />
         </g>
 
-        {/* Anillo de cobertura aproximada alrededor de Chillón */}
+        {/* Anillos de cobertura aproximada (~150 km y ~250 km radio) */}
         <circle
-          cx="425"
-          cy="305"
-          r="120"
+          cx={CHILLON.cx}
+          cy={CHILLON.cy}
+          r="90"
           fill="none"
           stroke="#1e5aa8"
           strokeWidth="1"
           strokeDasharray="3 5"
-          opacity="0.45"
+          opacity="0.5"
         />
         <circle
-          cx="425"
-          cy="305"
-          r="200"
+          cx={CHILLON.cx}
+          cy={CHILLON.cy}
+          r="150"
           fill="none"
           stroke="#1e5aa8"
           strokeWidth="1"
           strokeDasharray="3 5"
-          opacity="0.25"
+          opacity="0.3"
         />
 
         {/* Provincias destacadas */}
-        {HIGHLIGHT_PROVINCES.map((p) => {
-          const isSede = "sede" in p && p.sede;
-          if (isSede) return null;
-          return (
-            <g key={p.name}>
-              <circle cx={p.cx} cy={p.cy} r="6" fill="#123a6b" />
-              <circle cx={p.cx} cy={p.cy} r="11" fill="#123a6b" opacity="0.18" />
-              <text
-                x={p.cx + 10}
-                y={p.cy + 4}
-                fontSize="13"
-                fontFamily="ui-sans-serif, system-ui, Inter, sans-serif"
-                fontWeight="600"
-                fill="#1f2937"
-              >
-                {p.name}
-              </text>
-            </g>
-          );
-        })}
+        {HIGHLIGHT_PROVINCES.map((p) => (
+          <g key={p.name}>
+            <circle cx={p.cx} cy={p.cy} r="11" fill="#123a6b" opacity="0.18" />
+            <circle cx={p.cx} cy={p.cy} r="5.5" fill="#123a6b" />
+            <text
+              x={p.cx + 9}
+              y={p.cy + 4}
+              fontSize="13"
+              fontFamily="ui-sans-serif, system-ui, Inter, sans-serif"
+              fontWeight="600"
+              fill="#0b1f3a"
+              paintOrder="stroke"
+              stroke="white"
+              strokeWidth="3"
+            >
+              {p.name}
+            </text>
+          </g>
+        ))}
 
         {/* Sede — Chillón / Ciudad Real */}
         <g>
-          <circle cx="425" cy="305" r="38" fill="url(#cov-pin-pulse)">
+          <circle cx={CHILLON.cx} cy={CHILLON.cy} r="35" fill="url(#cov-pin-pulse)">
             <animate
               attributeName="r"
-              values="28;42;28"
+              values="26;42;26"
               dur="3s"
               repeatCount="indefinite"
             />
             <animate
               attributeName="opacity"
-              values="0.85;0.4;0.85"
+              values="0.9;0.4;0.9"
               dur="3s"
               repeatCount="indefinite"
             />
           </circle>
-          <circle cx="425" cy="305" r="9" fill="#c8102e" stroke="white" strokeWidth="2" />
+          <circle
+            cx={CHILLON.cx}
+            cy={CHILLON.cy}
+            r="9"
+            fill="#c8102e"
+            stroke="white"
+            strokeWidth="2.5"
+          />
           <text
-            x="425"
-            y="285"
+            x={CHILLON.cx}
+            y={CHILLON.cy - 18}
             textAnchor="middle"
             fontSize="14"
             fontFamily="ui-sans-serif, system-ui, Inter, sans-serif"
-            fontWeight="700"
-            fill="#0b1f3a"
+            fontWeight="800"
+            fill="#c8102e"
+            paintOrder="stroke"
+            stroke="white"
+            strokeWidth="3"
           >
             Chillón
           </text>
         </g>
 
-        {/* Brújula decorativa */}
+        {/* Mar Mediterráneo / Atlántico (etiquetas tenues) */}
+        <text
+          x="700"
+          y="410"
+          fontSize="10"
+          fontStyle="italic"
+          fontFamily="ui-sans-serif, system-ui, Inter, sans-serif"
+          fill="#94a3b8"
+          letterSpacing="1"
+        >
+          Mar Mediterráneo
+        </text>
+        <text
+          x="40"
+          y="180"
+          fontSize="10"
+          fontStyle="italic"
+          fontFamily="ui-sans-serif, system-ui, Inter, sans-serif"
+          fill="#94a3b8"
+          letterSpacing="1"
+        >
+          Océano Atlántico
+        </text>
+
+        {/* Brújula */}
         <g
-          transform="translate(740, 60)"
+          transform="translate(755, 50)"
           fontFamily="ui-sans-serif, system-ui, Inter, sans-serif"
           fontWeight="700"
-          fontSize="11"
-          fill="#6b7280"
+          fontSize="10"
+          fill="#64748b"
         >
           <circle r="22" fill="white" stroke="#cbd5e1" strokeWidth="1" />
-          <line x1="0" y1="-16" x2="0" y2="16" stroke="#9ca3af" strokeWidth="1" />
-          <line x1="-16" y1="0" x2="16" y2="0" stroke="#9ca3af" strokeWidth="1" />
+          <path d="M 0 -16 L -5 0 L 0 -4 L 5 0 Z" fill="#c8102e" />
+          <path d="M 0 16 L -5 0 L 0 4 L 5 0 Z" fill="#94a3b8" />
           <text y="-22" textAnchor="middle">N</text>
         </g>
       </svg>
 
-      <div className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-neutral-800 shadow-sm ring-1 ring-neutral-200">
+      <div className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-neutral-800 shadow-sm ring-1 ring-neutral-200">
         <MapPin className="size-3.5 text-brand-red-600" strokeWidth={1.75} />
         Sede: Chillón — Ciudad Real
       </div>

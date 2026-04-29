@@ -137,18 +137,31 @@
   margin-top: 16px;
 }
 
-/* Animación sutil de color en los números de la sección de estadísticas.
-   Latido lento entre el azul corporativo (--brand-blue-700 #123A6B) y el rojo
-   corporativo (--brand-red-600 #C8102E). 8s con `ease-in-out` y `alternate`,
-   por lo que la transición es fluida en ambos sentidos: blue→red (8s),
-   red→blue (8s), de forma indefinida. Solo afecta al `color`.
-   Como `animation-delay: 0s` en todos los .stat-number y todos se montan en
-   el mismo paint, los cuatro contadores laten al unísono — sin onda. */
+/* Animación de color en los números de stats.
+   Va de azul oscuro corporativo a rojo corporativo pasando por tonos
+   intermedios (azul medio, violeta, rojo) para que la transición se perciba
+   como un gradiente fluido y no como un cambio binario.
+   Duración total muy larga (24s + 24s vuelta = 48s ping-pong) con
+   `ease-in-out` para que sea calmada y elegante.
+   `animation-delay: 0s` y montaje simultáneo de los cuatro contadores
+   garantizan que todos pulsan al unísono. */
 @keyframes statColorShift {
-  from {
+  0% {
+    color: #0b1f3a;
+  }
+  20% {
     color: #123a6b;
   }
-  to {
+  40% {
+    color: #1e5aa8;
+  }
+  55% {
+    color: #6e2a4f;
+  }
+  70% {
+    color: #a50d26;
+  }
+  100% {
     color: #c8102e;
   }
 }
@@ -156,17 +169,21 @@
 .stat-number,
 div.stat-number {
   animation-name: statColorShift !important;
-  animation-duration: 8s !important;
+  animation-duration: 24s !important;
   animation-timing-function: ease-in-out !important;
   animation-iteration-count: infinite !important;
   animation-direction: alternate !important;
   animation-delay: 0s !important;
   animation-fill-mode: both !important;
+  /* Transición CSS adicional sobre el color: si por cualquier razón el motor
+     de animación se "salta" un fotograma (cambio de pestaña, throttling), la
+     interpolación entre keyframes seguirá viéndose suave. */
+  transition: color 1.5s ease-in-out;
   will-change: color;
 }
 
-/* Garantizamos que el color animado se hereda en cualquier descendiente
-   (motion.span del Counter, suffix span) aunque alguna utility de Tailwind
+/* Forzamos herencia del color animado en cualquier descendiente
+   (motion.span del Counter, suffix span) aunque algún utility de Tailwind
    intente fijar otro color. */
 .stat-number > *,
 .stat-number span {
@@ -278,11 +295,11 @@ div.stat-number {
     scroll-behavior: auto !important;
   }
 
-  /* Excepción explícita: el latido de color de los stats es decoración mínima
-     (solo cambia `color`, no afecta a tamaño, posición ni texto), así que lo
-     mantenemos activo incluso con reduced-motion. Para suavizarlo aún más en
-     ese caso, lo extendemos a 16s. */
+  /* Excepción explícita: el gradiente de color de los stats es decoración
+     mínima (solo cambia `color`, no afecta a tamaño, posición ni texto), así
+     que lo mantenemos activo incluso con reduced-motion, pero alargado a 48s
+     para que sea aún más calmado para el usuario que prefiere menos motion. */
   .stat-number {
-    animation: statColorShift 16s ease-in-out infinite alternate !important;
+    animation: statColorShift 48s ease-in-out infinite alternate !important;
   }
 }
