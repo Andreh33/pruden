@@ -153,10 +153,24 @@
   }
 }
 
-.stat-number {
-  animation: statColorShift 8s ease-in-out infinite alternate;
-  animation-delay: 0s;
+.stat-number,
+div.stat-number {
+  animation-name: statColorShift !important;
+  animation-duration: 8s !important;
+  animation-timing-function: ease-in-out !important;
+  animation-iteration-count: infinite !important;
+  animation-direction: alternate !important;
+  animation-delay: 0s !important;
+  animation-fill-mode: both !important;
   will-change: color;
+}
+
+/* Garantizamos que el color animado se hereda en cualquier descendiente
+   (motion.span del Counter, suffix span) aunque alguna utility de Tailwind
+   intente fijar otro color. */
+.stat-number > *,
+.stat-number span {
+  color: inherit !important;
 }
 
 /* Reveal: animaciones de entrada 100% CSS. Disparan automáticamente al insertar
@@ -251,7 +265,9 @@
   animation-play-state: paused;
 }
 
-/* Reduced motion: anula animaciones decorativas */
+/* Reduced motion: anula animaciones decorativas. La regla con `*`+`!important`
+   neutraliza tanto framer-motion como CSS keyframes salvo las que se exceptúen
+   abajo de forma explícita. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -260,5 +276,13 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Excepción explícita: el latido de color de los stats es decoración mínima
+     (solo cambia `color`, no afecta a tamaño, posición ni texto), así que lo
+     mantenemos activo incluso con reduced-motion. Para suavizarlo aún más en
+     ese caso, lo extendemos a 16s. */
+  .stat-number {
+    animation: statColorShift 16s ease-in-out infinite alternate !important;
   }
 }
