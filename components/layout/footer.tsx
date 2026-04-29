@@ -63,8 +63,18 @@ export function Footer() {
       <section className="bg-brand-blue-900 pb-12 pt-6 text-neutral-300">
         <div className="container-prose grid gap-10 md:grid-cols-2 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <Link href="/" aria-label={`${SITE.name} — Inicio`} className="inline-block bg-white p-3">
-              <Image src="/logo.png" alt={SITE.shortName} width={200} height={64} className="h-12 w-auto" />
+            <Link
+              href="/"
+              aria-label={`${SITE.name} — Inicio`}
+              className="inline-block rounded-md bg-white p-4"
+            >
+              <Image
+                src="/logo-pruden.png"
+                alt={SITE.shortName}
+                width={350}
+                height={100}
+                className="h-16 w-auto md:h-20"
+              />
             </Link>
             <p className="mt-5 max-w-md text-sm leading-relaxed">
               Empresa de movimientos de tierra, excavaciones, transportes, suministro de áridos y

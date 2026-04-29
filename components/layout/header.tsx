@@ -28,7 +28,7 @@ export function Header() {
         <div
           className={cn(
             "container-prose flex items-center justify-between transition-[height] duration-200 ease-out",
-            scrolled ? "h-16 lg:h-[72px]" : "h-16 lg:h-20",
+            scrolled ? "h-20 lg:h-[88px]" : "h-24 lg:h-28",
           )}
         >
           <Link
@@ -37,14 +37,14 @@ export function Header() {
             className="inline-flex items-center"
           >
             <Image
-              src="/logo.png"
+              src="/logo-pruden.png"
               alt={SITE.shortName}
-              width={220}
-              height={72}
+              width={350}
+              height={100}
               priority
               className={cn(
                 "w-auto transition-[height] duration-200 ease-out",
-                scrolled ? "h-9 lg:h-10" : "h-9 lg:h-12",
+                scrolled ? "h-12 lg:h-14" : "h-14 lg:h-20",
               )}
             />
           </Link>
