@@ -144,9 +144,16 @@ public/
 
 ## Despliegue
 
-Repo: **https://github.com/Andreh33/pruden.git** · rama `main`.
+- **Repo:** https://github.com/Andreh33/pruden.git · rama `main`.
+- **Producción:** https://pruden-wine.vercel.app (alias) · https://pruden-latech767-8157s-projects.vercel.app
+- **Inspector:** https://vercel.com/latech767-8157s-projects/pruden
+- **Auto-deploy:** cualquier `git push origin main` dispara un build de producción.
 
-Vercel (preset Next.js auto). Configurar las mismas variables de entorno en Production y Preview.
+### Provisión Turso (Vercel Marketplace)
+
+Realizado vía `vercel integration add tursocloud/database`. La base de datos `database-indigo-kettle` (región `dub1`, plan Starter $0/mes) está vinculada al proyecto y las variables `TURSO_DATABASE_URL` + `TURSO_AUTH_TOKEN` se inyectan automáticamente en Production, Preview y Development.
+
+El esquema (`contact_messages`) ya está aplicado: `pnpm db:push` de nuevo si modificas `db/schema.ts`.
 
 ## Reglas de oro para próximas sesiones
 
