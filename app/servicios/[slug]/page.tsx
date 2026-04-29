@@ -78,7 +78,7 @@ export default async function ServicioDetallePage({
           <div className="absolute inset-0 bg-gradient-to-r from-brand-blue-900/85 via-brand-blue-900/70 to-brand-blue-900/40" />
         </div>
         <div className="container-prose py-24 md:py-32">
-          <Reveal>
+          <Reveal eager>
             <nav aria-label="Migas de pan" className="text-[13px] text-white/70">
               <Link href="/" className="hover:text-white">
                 Inicio
@@ -91,16 +91,16 @@ export default async function ServicioDetallePage({
               <span className="text-white">{s.title}</span>
             </nav>
           </Reveal>
-          <Reveal delay={0.05}>
+          <Reveal eager delay={0.05}>
             <h1
-              className="mt-4 max-w-3xl font-bold tracking-tight"
+              className="mt-4 max-w-3xl font-bold tracking-tight text-white"
               style={{ fontSize: "var(--font-size-hero)", lineHeight: 1.05 }}
             >
               {detail.hero.h1}
             </h1>
           </Reveal>
           {detail.hero.subtitle ? (
-            <Reveal delay={0.1}>
+            <Reveal eager delay={0.1}>
               <p
                 className="mt-5 max-w-2xl text-white/85"
                 style={{ fontSize: "var(--font-size-lead)" }}

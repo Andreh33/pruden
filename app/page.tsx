@@ -30,20 +30,20 @@ export default function HomePage() {
         </div>
 
         <div className="container-prose flex min-h-[78vh] flex-col justify-center py-24 lg:py-36">
-          <Reveal>
+          <Reveal eager>
             <p className="mb-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-brand-blue-200">
               Pruden e Hijos
             </p>
           </Reveal>
-          <Reveal delay={0.05}>
+          <Reveal eager delay={0.05}>
             <h1
-              className="max-w-3xl font-bold tracking-tight"
+              className="max-w-3xl font-bold tracking-tight text-white"
               style={{ fontSize: "var(--font-size-hero)", lineHeight: 1.05 }}
             >
               Movimientos de tierra y transportes
             </h1>
           </Reveal>
-          <Reveal delay={0.12}>
+          <Reveal eager delay={0.12}>
             <p
               className="mt-5 max-w-2xl text-white/85"
               style={{ fontSize: "var(--font-size-lead)" }}
@@ -51,7 +51,7 @@ export default function HomePage() {
               Construyendo el futuro proyecto a proyecto.
             </p>
           </Reveal>
-          <Reveal delay={0.2}>
+          <Reveal eager delay={0.2}>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg">
                 <Link href="/contacto">

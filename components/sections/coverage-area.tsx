@@ -63,9 +63,10 @@ export function CoverageArea() {
  */
 function CoverageMap() {
   return (
-    <div className="relative aspect-[5/4] overflow-hidden rounded-md border border-neutral-200 bg-neutral-50 p-6">
+    <div className="relative aspect-[5/4] w-full overflow-hidden rounded-md border border-neutral-200 bg-neutral-50 p-6">
       <svg
         viewBox="0 0 600 480"
+        preserveAspectRatio="xMidYMid meet"
         xmlns="http://www.w3.org/2000/svg"
         role="img"
         aria-label="Mapa de cobertura: España con sede en Chillón, Ciudad Real"
