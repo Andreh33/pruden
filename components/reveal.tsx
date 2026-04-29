@@ -51,7 +51,10 @@ export function Reveal({
     <motion.div
       initial={{ opacity: 0, x, y }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once, margin: "-80px" }}
+      // amount:0.05 dispara cuando ≥5% del elemento es visible (hero/contenido above-the-fold
+      // intersecta desde el primer paint). margin solo encoge el bottom para que el resto
+      // de secciones revelen ligeramente antes de tocar el borde inferior — nunca el top.
+      viewport={{ once, amount: 0.05, margin: "0px 0px -10% 0px" }}
       transition={{ duration, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
       {...rest}

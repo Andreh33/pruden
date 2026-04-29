@@ -43,7 +43,8 @@
   --font-size-h1: clamp(1.875rem, 3vw + 1rem, 3rem);
   --font-size-h2: clamp(1.5rem, 2vw + 0.75rem, 2.25rem);
   --font-size-h3: clamp(1.25rem, 1.5vw + 0.5rem, 1.5rem);
-  --font-size-stat: clamp(2.5rem, 6vw + 1rem, 5rem);
+  --font-size-stat: clamp(3rem, 7vw + 1rem, 5.75rem);
+  --font-size-stat-label: clamp(0.875rem, 0.25vw + 0.75rem, 1rem);
   --font-size-lead: clamp(1.125rem, 0.5vw + 1rem, 1.25rem);
 
   --tracking-tight: -0.02em;
@@ -131,6 +132,23 @@
   height: 3px;
   background: var(--color-brand-red-600);
   margin-top: 16px;
+}
+
+/* Animación sutil de color en los números de la sección de estadísticas.
+   Va y viene entre el azul corporativo (--brand-blue-700) y el rojo (--brand-red-600).
+   8s con easing suave para que se perciba como un latido lento, no un parpadeo. */
+@keyframes statColorShift {
+  0% {
+    color: #123a6b; /* brand-blue-700 */
+  }
+  100% {
+    color: #c8102e; /* brand-red-600 */
+  }
+}
+
+.stat-number-shift {
+  animation: statColorShift 8s ease-in-out infinite alternate;
+  will-change: color;
 }
 
 /* Reduced motion: anula animaciones decorativas */

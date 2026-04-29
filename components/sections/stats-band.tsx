@@ -31,11 +31,11 @@ function StatItem({ stat }: { stat: (typeof stats)[number] }) {
 
   return (
     <div ref={ref} className="text-center md:text-left">
-      <span className="inline-flex size-10 items-center justify-center rounded-md bg-brand-blue-50 text-brand-blue-700">
+      <span className="inline-flex size-11 items-center justify-center rounded-md bg-brand-blue-50 text-brand-blue-700">
         <Icon className="size-5" strokeWidth={1.75} />
       </span>
       <div
-        className="num mt-4 font-bold tracking-tight text-brand-blue-900"
+        className="num stat-number-shift mt-4 font-bold tracking-tight"
         style={{ fontSize: "var(--font-size-stat)", lineHeight: 1 }}
       >
         {stat.prefix ?? ""}
@@ -44,9 +44,14 @@ function StatItem({ stat }: { stat: (typeof stats)[number] }) {
         ) : (
           <Counter to={stat.value} />
         )}
-        {stat.suffix ? <span className="text-brand-blue-700">{stat.suffix}</span> : null}
+        {stat.suffix ? <span>{stat.suffix}</span> : null}
       </div>
-      <div className="mt-2 text-sm text-neutral-600">{stat.label}</div>
+      <div
+        className="mt-3 font-medium text-neutral-700"
+        style={{ fontSize: "var(--font-size-stat-label)" }}
+      >
+        {stat.label}
+      </div>
     </div>
   );
 }
