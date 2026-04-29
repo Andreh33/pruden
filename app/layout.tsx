@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import { CookieBanner } from "@/components/cookie-banner";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
+import { WhatsAppFloat } from "@/components/whatsapp-float";
 import { SITE } from "@/lib/config";
 
 import "./globals.css";
@@ -110,6 +111,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <Footer />
+        <WhatsAppFloat />
         <CookieBanner />
         <Toaster
           position="bottom-right"

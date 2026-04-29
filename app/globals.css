@@ -282,6 +282,36 @@ div.stat-number {
   animation-play-state: paused;
 }
 
+/* Botón flotante de WhatsApp — sombra elevada + anillo pulsante muy sutil
+   (la regla global de prefers-reduced-motion lo neutraliza si el usuario
+   prefiere menos animación). */
+@keyframes whatsappPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 12px 28px -10px rgba(15, 23, 42, 0.35),
+      0 6px 12px -6px rgba(15, 23, 42, 0.25),
+      0 0 0 0 rgba(37, 211, 102, 0.55);
+  }
+  50% {
+    box-shadow:
+      0 12px 28px -10px rgba(15, 23, 42, 0.35),
+      0 6px 12px -6px rgba(15, 23, 42, 0.25),
+      0 0 0 14px rgba(37, 211, 102, 0);
+  }
+}
+
+.whatsapp-fab {
+  box-shadow:
+    0 12px 28px -10px rgba(15, 23, 42, 0.35),
+    0 6px 12px -6px rgba(15, 23, 42, 0.25);
+  animation: whatsappPulse 2.6s ease-in-out infinite;
+}
+
+.whatsapp-fab:hover {
+  background-color: var(--wa-hover, #1fad52) !important;
+}
+
 /* Reduced motion: anula animaciones decorativas. La regla con `*`+`!important`
    neutraliza tanto framer-motion como CSS keyframes salvo las que se exceptúen
    abajo de forma explícita. */
