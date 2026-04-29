@@ -43,8 +43,8 @@
   --font-size-h1: clamp(1.875rem, 3vw + 1rem, 3rem);
   --font-size-h2: clamp(1.5rem, 2vw + 0.75rem, 2.25rem);
   --font-size-h3: clamp(1.25rem, 1.5vw + 0.5rem, 1.5rem);
-  --font-size-stat: clamp(3.75rem, 9vw + 1rem, 7rem);
-  --font-size-stat-label: clamp(1rem, 0.5vw + 0.875rem, 1.25rem);
+  --font-size-stat: clamp(2.5rem, 5.5vw + 0.5rem, 4.25rem);
+  --font-size-stat-label: clamp(0.8125rem, 0.25vw + 0.7rem, 0.95rem);
   --font-size-lead: clamp(1.125rem, 0.5vw + 1rem, 1.25rem);
 
   --tracking-tight: -0.02em;
@@ -274,7 +274,7 @@ div.stat-number {
   display: flex;
   flex-shrink: 0;
   width: max-content;
-  animation: marqueeScrollLeft 28s linear infinite;
+  animation: marqueeScrollLeft 70s linear infinite;
   will-change: transform;
 }
 
